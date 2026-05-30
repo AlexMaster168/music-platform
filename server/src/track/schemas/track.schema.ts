@@ -1,31 +1,51 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import {Document} from 'mongoose';
-import * as mongoose from 'mongoose'
+import { HydratedDocument, SchemaTypes, Types } from 'mongoose';
 
-export type TrackDocument = Track & Document;
+export type TrackDocument = HydratedDocument<Track>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Track {
-    @Prop()
-    name: string;
+   @Prop({ required: true, trim: true })
+   name: string;
 
-    @Prop()
-    artist: string;
+   @Prop({ type: SchemaTypes.ObjectId, ref: 'Artist', required: true })
+   artistId: Types.ObjectId;
 
-    @Prop()
-    text: string;
+   @Prop({ type: SchemaTypes.ObjectId, ref: 'Album' })
+   albumId?: Types.ObjectId;
 
-    @Prop()
-    listens: number;
+   @Prop({ required: true })
+   audio: string;
 
-    @Prop()
-    picture: string;
+   @Prop()
+   picture?: string;
 
-    @Prop()
-    audio: string;
+   @Prop({ default: 0 })
+   duration: number;
 
-    @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]})
-    comments: Comment[];
+   @Prop({ default: 0 })
+   listens: number;
+
+   @Prop({ type: [String], default: [] })
+   genres: string[];
+
+   @Prop()
+   language?: string;
+
+   @Prop({ default: false })
+   isCover: boolean;
+
+   @Prop({ type: SchemaTypes.ObjectId, ref: 'Track' })
+   originalTrackId?: Types.ObjectId;
+
+   @Prop()
+   lyrics?: string;
+
+   @Prop({ type: SchemaTypes.ObjectId, ref: 'User' })
+   uploadedBy?: Types.ObjectId;
+
+   @Prop({ type: [{ type: SchemaTypes.ObjectId, ref: 'Comment' }], default: [] })
+   comments: Types.ObjectId[];
 }
 
 export const TrackSchema = SchemaFactory.createForClass(Track);

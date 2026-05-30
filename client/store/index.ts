@@ -1,15 +1,19 @@
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './authSlice';
+import playerReducer from './playerSlice';
+import queueReducer from './queueSlice';
 
+export const makeStore = () =>
+   configureStore({
+      reducer: {
+         auth: authReducer,
+         player: playerReducer,
+         queue: queueReducer,
+      },
+   });
 
-// create a makeStore function
-import {Context, createWrapper, MakeStore} from "next-redux-wrapper";
-import {AnyAction, applyMiddleware, createStore} from "redux";
-import {reducer, RootState} from "./reducers";
-import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
+export const store = makeStore();
 
-const makeStore: MakeStore<RootState>
-    = (context: Context) => createStore(reducer, applyMiddleware(thunk));
-
-// export an assembled wrapper
-export const wrapper = createWrapper<RootState>(makeStore, {debug: true});
-
-export type NextThunkDispatch = ThunkDispatch<RootState, void, AnyAction>
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch'];

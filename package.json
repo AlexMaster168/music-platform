@@ -1,0 +1,30 @@
+{
+  "name": "music-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Музыкальная платформа (бэкенд NestJS + фронтенд Next.js) — pnpm monorepo",
+  "packageManager": "pnpm@10.33.2",
+  "engines": {
+    "node": ">=20"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@nestjs/core",
+      "@scarf/scarf",
+      "esbuild",
+      "mongodb-memory-server",
+      "sharp",
+      "unrs-resolver"
+    ]
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel run dev",
+    "build": "pnpm -r run build",
+    "start": "pnpm -r --parallel run start",
+    "seed": "pnpm --filter server run seed",
+    "smoke": "pnpm --filter server run smoke",
+    "lint": "pnpm -r run lint",
+    "dev:server": "pnpm --filter server run dev",
+    "dev:client": "pnpm --filter client run dev"
+  }
+}

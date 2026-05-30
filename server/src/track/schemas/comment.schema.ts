@@ -1,20 +1,21 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-import {Track} from "./track.schema";
-import * as mongoose from 'mongoose'
+import { HydratedDocument, SchemaTypes, Types } from 'mongoose';
 
-export type CommentDocument = Comment & Document;
+export type CommentDocument = HydratedDocument<Comment>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Comment {
-    @Prop()
-    username: string;
+   @Prop({ type: SchemaTypes.ObjectId, ref: 'User' })
+   userId?: Types.ObjectId;
 
-    @Prop()
-    text: string;
+   @Prop({ required: true })
+   username: string;
 
-    @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Track'})
-    track: Track;
+   @Prop({ required: true })
+   text: string;
+
+   @Prop({ type: SchemaTypes.ObjectId, ref: 'Track' })
+   trackId: Types.ObjectId;
 }
 
 export const CommentSchema = SchemaFactory.createForClass(Comment);

@@ -1,7 +1,13 @@
-import {ObjectId} from "mongoose";
+import { IsMongoId, IsString, MinLength } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCommentDto {
-    readonly username: string;
-    readonly text: string;
-    readonly trackId: ObjectId;
+   @ApiProperty()
+   @IsMongoId()
+   trackId: string;
+
+   @ApiProperty({ example: 'Огонь трек!' })
+   @IsString()
+   @MinLength(1)
+   text: string;
 }

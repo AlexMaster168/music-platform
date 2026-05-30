@@ -1,0 +1,56 @@
+@import 'tailwindcss';
+
+@theme {
+   --color-base: #0f0f0f;
+   --color-elevated: #181818;
+   --color-surface: #212121;
+   --color-surface-hover: #2a2a2a;
+   --color-line: #2f2f2f;
+   --color-fg: #ffffff;
+   --color-muted: #aaaaaa;
+   --color-brand: #ff0033;
+   --color-brand-hover: #ff3355;
+
+   --radius-card: 12px;
+}
+
+@layer base {
+   * {
+      border-color: var(--color-line);
+   }
+   html,
+   body {
+      background-color: var(--color-base);
+      color: var(--color-fg);
+      -webkit-font-smoothing: antialiased;
+   }
+   body {
+      font-family:
+         'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+   }
+}
+
+/* Тонкий скроллбар в стиле YT Music */
+::-webkit-scrollbar {
+   width: 10px;
+   height: 10px;
+}
+::-webkit-scrollbar-track {
+   background: transparent;
+}
+::-webkit-scrollbar-thumb {
+   background: #3a3a3a;
+   border-radius: 999px;
+   border: 2px solid var(--color-base);
+}
+::-webkit-scrollbar-thumb:hover {
+   background: #555;
+}
+
+/* Утилита для обрезки текста в N строк */
+.line-clamp-2 {
+   display: -webkit-box;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+}

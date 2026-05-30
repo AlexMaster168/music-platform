@@ -1,0 +1,43 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# env / секреты — НЕ коммитим
+.env
+.env.local
+.env.*.local
+
+# build outputs
+dist/
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# loaded/uploaded media (генерируется seed'ом и загрузками)
+**/static/audio/
+**/static/image/
+
+# verification screenshots (внутренние прогоны Playwright)
+server/scripts/shots/
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# tests
+coverage/
+.nyc_output/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/settings.json
+
+# ВАЖНО: docs/screenshots коммитим (картинки для README) — НЕ игнорируем

@@ -2,6 +2,18 @@
 /dist
 /node_modules
 
+# env (секреты — не коммитим!)
+.env
+.env.local
+.env.*.local
+
+# uploaded files
+/src/static
+/dist/static
+
+# verification screenshots
+/scripts/shots
+
 # Logs
 logs
 *.log
